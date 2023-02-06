@@ -1,0 +1,108 @@
+﻿<Page x:Class="School.PageListOfService"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:School"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      MinHeight="450" MinWidth="800"
+      Title="PageListOfService">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock>Введите название услуги:</TextBlock>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Width="600">
+                <TextBox Name="SearchName" TextChanged="SearchName_TextChanged"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock>Введите описание услуги:</TextBlock>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="600">
+                <TextBox Name="SearchDescription" TextChanged="SearchDescription_TextChanged"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="2" Margin="5">
+            <StackPanel  Orientation="Horizontal">
+                <StackPanel VerticalAlignment="Center">
+                    <ComboBox Name="Sorting" SelectionChanged="Sorting_SelectionChanged" Width="350">
+                        <ComboBoxItem>По возрастанию</ComboBoxItem>
+                        <ComboBoxItem>По убыванию</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" Width="350">
+                    <ComboBox Name="Filtering" SelectionChanged="Filtering_SelectionChanged">
+                        <ComboBoxItem>Все</ComboBoxItem>
+                        <ComboBoxItem>От 0% До 5%</ComboBoxItem>
+                        <ComboBoxItem>От 5% До 15%</ComboBoxItem>
+                        <ComboBoxItem>От 15% До 30%</ComboBoxItem>
+                        <ComboBoxItem>От 30% До 70%</ComboBoxItem>
+                        <ComboBoxItem>От 70% До 100%</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="3" VerticalAlignment="Center">
+            <Button Name="AddService" Visibility="Collapsed" Click="AddService_Click" Width="300">Добавить новую услугу</Button>
+        </StackPanel>
+
+        <ListView Grid.Row="4" Name="ListService" Height="200" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <Grid Height="100"  VerticalAlignment="Center"  Background="{Binding TextBrush}"  >
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" >
+                                <Image Name="ImageService" Source="{Binding MainImagePath}"></Image>
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <StackPanel>
+                                        <TextBlock Name="service" Text="{Binding Title}" Style="{StaticResource TextList}"></TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Name="Cost" Text="{Binding cost}" TextDecorations="Strikethrough" Style="{StaticResource TextList}"></TextBlock>
+                                            <TextBlock Name="Price" Text="{Binding price}" Style="{StaticResource TextList}"></TextBlock>
+                                        </StackPanel>
+
+                                        <TextBlock Name="Sale" Text="{Binding sale}" Style="{StaticResource TextList}"></TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="1" >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Uid="{Binding ID}" Name="SingUp" Click="SingUp_Click" Visibility="{Binding btn_admin}">Записать</Button>
+                                        <Button Uid="{Binding ID}" Name="Delete" Click="Delete_Click" Visibility="{Binding btn_admin}" >Удаление</Button>
+                                        <Button Uid="{Binding ID}" Name="Update" Click="Update_Click" Visibility="{Binding btn_admin}">Редактирование</Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Grid.Row="5" VerticalAlignment="Center">
+            <TextBlock Name="count"></TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>
