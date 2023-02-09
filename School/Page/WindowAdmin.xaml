@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School"
         mc:Ignorable="d"
-        Title="Вход для админа" Height="120" Width="200">
+        d:MinHeight="150" d:MinWidth="200"
+        MaxHeight="150" MaxWidth="200"
+        Title="Вход для админа" Icon="/image/school_logo.ico" >
     <Grid>
-        <StackPanel Background="#e7fabf">
+        <StackPanel Background="#E7FABF">
             <GroupBox Header="Введите код">
-                <TextBox Name="adminkod"></TextBox>
+                <TextBox Name="admincode"></TextBox>
             </GroupBox>
 
-            <Button Name="add" Click="add_Click">Сохранить</Button>
+            <Button Name="Add" Template="{StaticResource Button}" Click="Add_Click">Сохранить</Button>
         </StackPanel>
     </Grid>
 </Window>

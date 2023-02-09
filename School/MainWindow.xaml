@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Школа иностранных языков" MinHeight="450" MinWidth="800" Icon="/image/school_logo.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
@@ -13,16 +13,12 @@
         </Grid.RowDefinitions>
 
         <Grid>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+           
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image Height="70" Source="/image/school_logo.ico" Style="{StaticResource ImageLogo}"></Image>
-                <TextBlock VerticalAlignment="Center" Style="{StaticResource LogoText}">Леарн</TextBlock>
+                <TextBlock VerticalAlignment="Center" Style="{StaticResource HeaderText}">Леарн</TextBlock>
             </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                <Button Name="Services" Click="Services_Click">Услуги</Button>
-                <Button Name="Admin" Click="Admin_Click">Админ</Button>
-                <Button Name="Zap" Visibility="Collapsed" Click="Zapisi_Click">Ближайшие записи</Button>
-            </StackPanel>
-
+         
         </Grid>
         
         <StackPanel Grid.Row="1">

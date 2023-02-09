@@ -20,43 +20,15 @@ namespace School
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static string kod;
+
         public MainWindow()
         {
             InitializeComponent();
-            if (kod == "0000")
-            {
-                Zap.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                Zap.Visibility = Visibility.Collapsed;
-            }
+
             DBase.DB = new Entities();
             ClassFrame.newFrame = frmMain;
-            ClassFrame.newFrame.Navigate(new PageListOfService());
-
-        }
-
-        private void Services_Click(object sender, RoutedEventArgs e)
-        {
-
-            ClassFrame.newFrame.Navigate(new PageListOfService());
-
-        }
-
-        private void Admin_Click(object sender, RoutedEventArgs e)
-        {
-            WindowAdmin windowPerson = new WindowAdmin();  // создание объекта окна
-            windowPerson.ShowDialog();
-
-            ClassFrame.newFrame.Navigate(new PageListOfService());
-        }
-
-        private void Zapisi_Click(object sender, RoutedEventArgs e)
-        {
-            ClassFrame.newFrame.Navigate(new PageNearNote());
-        }
+            ClassFrame.newFrame.Navigate(new HomePage());
+        }            
     }
 }
 

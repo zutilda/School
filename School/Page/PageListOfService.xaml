@@ -5,17 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:School"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      MinHeight="450" MinWidth="800"
-      Title="PageListOfService">
+      d:MinHeight="450" MinWidth="800"
+      Title="Главная">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="1*" />            
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5">
@@ -54,15 +53,11 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="3" VerticalAlignment="Center">
-            <Button Name="AddService" Visibility="Collapsed" Click="AddService_Click" Width="300">Добавить новую услугу</Button>
-        </StackPanel>
-
-        <ListView Grid.Row="4" Name="ListService" Height="200" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch">
+        <ListView Grid.Row="3" Name="ListService" Height="200" ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Style="{StaticResource BorderStyle}">
-                        <Grid Height="100"  VerticalAlignment="Center"  Background="{Binding TextBrush}"  >
+                        <Grid Height="150"  VerticalAlignment="Center"  Background="{Binding TextBrush}"  >
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="300"/>
@@ -74,7 +69,7 @@
                             <Grid Grid.Column="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
-                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="40"/>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
                                     <StackPanel>
@@ -89,9 +84,9 @@
                                 </Grid>
                                 <Grid Grid.Row="1" >
                                     <StackPanel Orientation="Horizontal">
-                                        <Button Uid="{Binding ID}" Name="SingUp" Click="SingUp_Click" Visibility="{Binding btn_admin}">Записать</Button>
-                                        <Button Uid="{Binding ID}" Name="Delete" Click="Delete_Click" Visibility="{Binding btn_admin}" >Удаление</Button>
-                                        <Button Uid="{Binding ID}" Name="Update" Click="Update_Click" Visibility="{Binding btn_admin}">Редактирование</Button>
+                                        <Button Uid="{Binding ID}" Template="{StaticResource ButtonInElement}" Name="SingUp" Click="SingUp_Click" Visibility="{Binding btn_admin}">Записать</Button>
+                                        <Button Uid="{Binding ID}" Template="{StaticResource ButtonInElement}" Name="Delete" Click="Delete_Click" Visibility="{Binding btn_admin}" >Удаление</Button>
+                                        <Button Uid="{Binding ID}" Template="{StaticResource ButtonInElement}" Name="Update" Click="Update_Click" Visibility="{Binding btn_admin}">Редактирование</Button>
                                     </StackPanel>
                                 </Grid>
                             </Grid>
@@ -100,9 +95,17 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
+            <Button Grid.Column="0" Name="Home" Template="{StaticResource Button}" Click="Home_Click">На главную</Button>
+            <Button Grid.Column="1" Name="AddService" Visibility="Collapsed" Click="AddService_Click" Width="300">Добавить новую услугу</Button>
+        </Grid>
         <StackPanel Grid.Row="5" VerticalAlignment="Center">
-            <TextBlock Name="count"></TextBlock>
+            <TextBlock Name="CountService"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

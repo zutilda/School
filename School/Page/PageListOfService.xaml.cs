@@ -27,7 +27,7 @@ namespace School
             ListService.ItemsSource = DBase.DB.Service.ToList();
             Sorting.SelectedIndex = 0;
             Filtering.SelectedIndex = 0;
-            count.Text = DBase.DB.Service.ToList().Count + "/" + DBase.DB.Service.ToList().Count;
+            CountService.Text = DBase.DB.Service.ToList().Count + "/" + DBase.DB.Service.ToList().Count;
             if (admin == "0000")
             {
                 Service.btn_admin = Visibility.Visible;
@@ -43,31 +43,32 @@ namespace School
         {
             List<Service> services = new List<Service>();
             services = DBase.DB.Service.ToList();
-            //поиск название
 
-            if (!string.IsNullOrWhiteSpace(SearchName.Text))  // если строка не пустая и если она не состоит из пробелов
+            //Поиск по названию
+
+            if (!string.IsNullOrWhiteSpace(SearchName.Text))  // Проверка пустую запись и запись состоящую из пробелов
             {
                 services = services.Where(x => x.Title.ToLower().Contains(SearchName.Text.ToLower())).ToList();
             }
 
-            if (!string.IsNullOrWhiteSpace(SearchDescription.Text))  // если строка не пустая и если она не состоит из пробелов
+            if (!string.IsNullOrWhiteSpace(SearchDescription.Text)) 
             {
 
-                List<Service> trl = services.Where(x => x.Description != null).ToList();
-                if (trl.Count > 0)
+                List<Service> description = services.Where(x => x.Description != null).ToList();
+                if (description.Count > 0)
                 {
 
-                    services = trl.Where(x => x.Description.ToLower().Contains(SearchDescription.Text.ToLower())).ToList();
+                    services = description.Where(x => x.Description.ToLower().Contains(SearchDescription.Text.ToLower())).ToList();
 
                 }
                 else
                 {
-                    MessageBox.Show("нет описания");
+                    MessageBox.Show("Записей с таким описанием нет");
                     SearchDescription.Text = "";
                 }
 
             }
-            //Фильтрация
+            //Фильтрация по размеру скидки
 
             switch (Filtering.SelectedIndex)
             {
@@ -78,68 +79,28 @@ namespace School
                     break;
                 case 1:
                     {
-                        List<Service> ser = services.Where(x => x.price == "").ToList();
-                        if (ser.Count > 0)
-                        {
-                            foreach (Service s in ser)
-                            {
-                                services = services.Where(x => ((x.Discount >= 0) && (x.Discount * 100 < 5))).ToList();
-
-                            }
-                        }
-
+                        services = services.Where(x => ((x.Discount >= 0) && (x.Discount * 100 < 5))).ToList();
                     }
                     break;
                 case 2:
                     {
-                        List<Service> ser = services.Where(x => x.price == "").ToList();
-                        if (ser.Count > 0)
-                        {
-                            foreach (Service s in ser)
-                            {
-                                services = services.Where(x => ((x.Discount * 100 >= 5) && (x.Discount * 100 < 15))).ToList();
-
-                            }
-                        }
+                        services = services.Where(x => ((x.Discount * 100 >= 5) && (x.Discount * 100 < 15))).ToList();
                     }
                     break;
                 case 3:
                     {
-                        List<Service> ser = services.Where(x => x.price == "").ToList();
-                        if (ser.Count > 0)
-                        {
-                            foreach (Service s in ser)
-                            {
-                                services = services.Where(x => ((x.Discount * 100 >= 15) && (x.Discount * 100 < 30))).ToList();
+                        services = services.Where(x => ((x.Discount * 100 >= 15) && (x.Discount * 100 < 30))).ToList();
 
-                            }
-                        }
                     }
                     break;
                 case 4:
                     {
-                        List<Service> ser = services.Where(x => x.price == "").ToList();
-                        if (ser.Count > 0)
-                        {
-                            foreach (Service s in ser)
-                            {
-                                services = services.Where(x => ((x.Discount * 100 >= 30) && (x.Discount * 100 < 70))).ToList();
-
-                            }
-                        }
+                        services = services.Where(x => ((x.Discount * 100 >= 30) && (x.Discount * 100 < 70))).ToList();
                     }
                     break;
                 case 5:
                     {
-                        List<Service> ser = services.Where(x => x.price == "").ToList();
-                        if (ser.Count > 0)
-                        {
-                            foreach (Service s in ser)
-                            {
-                                services = services.Where(x => ((x.Discount * 100 >= 70) && (x.Discount * 100 < 100))).ToList();
-
-                            }
-                        }
+                        services = services.Where(x => ((x.Discount * 100 >= 70) && (x.Discount * 100 < 100))).ToList();
                     }
                     break;
             }
@@ -165,14 +126,14 @@ namespace School
             if (services.Count == 0)
             {
                 MessageBox.Show("нет записей");
-                count.Text = DBase.DB.Service.ToList().Count + "/" + DBase.DB.Service.ToList().Count;
+                CountService.Text = DBase.DB.Service.ToList().Count + "/" + DBase.DB.Service.ToList().Count;
                 SearchName.Text = "";
                 SearchDescription.Text = "";
                 Sorting.SelectedIndex = 0;
                 Filtering.SelectedIndex = 0;
 
             }
-            count.Text = services.Count + "/" + DBase.DB.Service.ToList().Count;
+            CountService.Text = services.Count + "/" + DBase.DB.Service.ToList().Count;
 
         }
         private void SearchName_TextChanged(object sender, TextChangedEventArgs e)
@@ -233,6 +194,11 @@ namespace School
             int id = Convert.ToInt32(btn.Uid);
             Service service = DBase.DB.Service.FirstOrDefault(x => x.ID == id);
             ClassFrame.newFrame.Navigate(new PageAddNote(service));
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            ClassFrame.newFrame.Navigate(new HomePage());
         }
     }
 }

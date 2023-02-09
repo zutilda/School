@@ -12,7 +12,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="7*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -22,35 +23,32 @@
         </Grid>
         <Grid Grid.Row="1">
             <StackPanel>
-                <GroupBox Header="Выберите клиента на запись">
+                <GroupBox Header="Выберите клиента на запись" Width="400">
                     <ComboBox Name="FullName">
-
                     </ComboBox>
                 </GroupBox>
-                <GroupBox Header="Введие дату записи">
-                    <DatePicker Name="StartDate"></DatePicker>
+                <GroupBox Header="Введие дату записи" Width="400">
+                    <DatePicker Name="Date"></DatePicker>
                 </GroupBox>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <GroupBox Header="Введите время начала" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBox Name="hh" Width="30" TextChanged="hh_TextChanged" Style="{StaticResource TextBoxText}"></TextBox>
-                            <TextBlock Style="{StaticResource TextBlockText}" FontSize="16">:</TextBlock>
-                            <TextBox Name="mm" Width="30" TextChanged="mm_TextChanged" Style="{StaticResource TextBoxText}"></TextBox>
-
-                        </StackPanel>
-
-
+                            <TextBox Name="TimeStart" Width="200"  TextChanged="TimeStart_TextChanged"/>
+                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Время конца" >
                         <TextBlock Name="TimeEnd"></TextBlock>
                     </GroupBox>
                 </StackPanel>
-
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2">
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="10 0 10 0">
+            <TextBlock Text="Комментарий" Style="{StaticResource FontFamilyText}"/>
+            <TextBox Name="Comment" Height="70"/>
+        </StackPanel>
+        <Grid Grid.Row="3">
             <StackPanel>
-                <Button Name="Add" Click="Add_Click">Записать</Button>
+                <Button Name="Add" Template="{StaticResource Button}" Click="Add_Click" Height="30" Width="200">Записать</Button>
             </StackPanel>
         </Grid>
     </Grid>

@@ -23,10 +23,10 @@ namespace School
         {
             InitializeComponent();
         }
-        private void add_Click(object sender, RoutedEventArgs e)
+        private void Add_Click(object sender, RoutedEventArgs e)
         {
-            PageListOfService.admin = adminkod.Text;
-            MainWindow.kod = adminkod.Text;
+            PageListOfService.admin = admincode.Text;
+            HomePage.code = admincode.Text;
             this.Close();
         }
     }

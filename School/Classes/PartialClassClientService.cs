@@ -9,7 +9,7 @@ namespace School
 {
     public partial class ClientService
     {
-        public SolidColorBrush UpcomingEntriesColor // Изменение цвета оставшегося времени до записи клиента
+        public SolidColorBrush NearetsNote // Изменение цвета оставшегося времени до записи клиента
         {
             get
             {
