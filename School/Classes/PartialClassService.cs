@@ -83,7 +83,7 @@ namespace School
             {
                 if (Discount != null)
                 {
-                   double a = Convert.ToDouble(Cost);
+                   double a = Math.Round(Convert.ToDouble(Cost),1);
                     return a + " ";
                 }
                 return "";                

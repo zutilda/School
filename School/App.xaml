@@ -29,11 +29,11 @@
 
         <ControlTemplate x:Key="ButtonInElement"  TargetType="Button">
             <Border Name="btnForeground" CornerRadius="15" BorderThickness="1" BorderBrush="White"
-                    Background="#04A0FF" Padding="5" HorizontalAlignment="Center" Margin="5"
+                    Background="#04A0FF"  HorizontalAlignment="Center" Margin="5"
                     VerticalAlignment="Center" Width="200" Cursor="Hand" Height="30">
                 <ContentControl x:Name="bntControl" Content="{TemplateBinding Content}"
                                 FontFamily="Comic Sans MS" Foreground="White"
-                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12"/>
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
