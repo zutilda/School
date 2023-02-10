@@ -198,7 +198,7 @@ namespace School
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            ClassFrame.newFrame.Navigate(new HomePage());
+            ClassFrame.newFrame.Navigate(new HomePage("0000"));
         }
     }
 }

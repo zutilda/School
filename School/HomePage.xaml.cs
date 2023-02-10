@@ -26,6 +26,19 @@ namespace School
             InitializeComponent();
            
         }
+
+        public HomePage(string code)
+        {
+            InitializeComponent();
+            if (code == "0000")
+            {
+                Note.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Note.Visibility = Visibility.Collapsed;
+            }
+        }
         private void Admin_Click(object sender, RoutedEventArgs e)
         {
             WindowAdmin windowPerson = new WindowAdmin();  

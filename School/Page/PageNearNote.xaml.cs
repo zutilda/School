@@ -29,14 +29,12 @@ namespace School
             List<ClientService> ser = DBase.DB.ClientService.Where(x => x.StartTime >= DateTime.Today && x.StartTime < data).ToList();
             ClassNote.ItemsSource = ser.OrderBy(x => x.StartTime).ToList();
             loadedData();
-        }
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(30);
             dispatcherTimer.Tick += dtTicker;
             dispatcherTimer.Start();
         }
+        
         private void loadedData()
         {
             List<ClientService> clientServices = DBase.DB.ClientService.ToList();
@@ -52,7 +50,7 @@ namespace School
         }
         private void Home_Click(object sender, RoutedEventArgs e)
         {
-            ClassFrame.newFrame.Navigate(new HomePage());
+            ClassFrame.newFrame.Navigate(new HomePage("0000"));
         }
     }
 }

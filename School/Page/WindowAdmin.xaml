@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:School"
         mc:Ignorable="d"
-        d:MinHeight="130" d:MinWidth="210"
-        MaxHeight="130" MaxWidth="210"
+        d:MinHeight="140" d:MinWidth="220"
+        MaxHeight="140" MaxWidth="220"
         Title="Код администратора" Icon="/image/school_logo.ico" >
     <Grid>
         <StackPanel Background="#E7FABF">

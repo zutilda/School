@@ -5,19 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:School"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-       MinHeight="450" MinWidth="800"
-      Title="AddPage">
+      d:MinHeight="500" d:MinWidth="800"
+      Title="Добавление и изменение">
 
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="270"/>
-                <RowDefinition/>
                 <RowDefinition Height="45"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-
             <Grid Grid.Row="0">
+                <TextBlock x:Name="Title"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HeaderText}"/>
+            </Grid>
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -27,7 +29,7 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Button Name="Back" Click="Back_Click" Visibility="Collapsed" IsEnabled="False" Template="{StaticResource ButtonInElement}">Назад</Button>
-                            <Image Name="ImageService"  Source="../image/picture.png" Width="180" Height="150" ></Image>
+                            <Image Margin="200, 0 , 0, 0" Name="ImageService"  Source="../image/picture.png" Width="160" Height="140" ></Image>
                             <Button Name="Next"  Click="Next_Click" Visibility="Collapsed" Template="{StaticResource ButtonInElement}">Вперед</Button>
                         </StackPanel>
                         <Button Name="SavePhoto" Template="{StaticResource ButtonInElement}" Click="SavePhoto_Click" Visibility="Collapsed">Сохранить изображение</Button>
@@ -59,12 +61,15 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <GroupBox Grid.Row="1" Header="Описание">
+            <GroupBox Grid.Row="2" Header="Описание">
                 <TextBox Name="Description"></TextBox>
             </GroupBox>
 
-            <StackPanel Grid.Row="2" VerticalAlignment="Center">
+            <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left">
                 <Button Name="Add" Template="{StaticResource Button}" Click="Add_Click">Сохранить</Button>
+            </StackPanel>
+            <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Name="Home" Template="{StaticResource Button}" Click="Home_Click">На главную</Button>
             </StackPanel>
 
 

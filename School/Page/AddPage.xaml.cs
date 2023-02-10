@@ -30,6 +30,7 @@ namespace School
         public AddPage()
         {
             InitializeComponent();
+            Title.Text = "Добавление услуги";
 
             service = new Service();
             AddPhotos.Visibility = Visibility.Collapsed;           
@@ -38,6 +39,8 @@ namespace School
         {
             InitializeComponent();
             flagUpdate = true;
+
+            Title.Text = "Изменение услуги";
 
             this.service = service;
 
@@ -180,11 +183,7 @@ namespace School
         {
             List<ServicePhoto> servicePhoto = DBase.DB.ServicePhoto.Where(x => x.ServiceID == service.ID).ToList();
 
-            n++;
-            if (Back.IsEnabled == false)
-            {
-                Back.IsEnabled = true;
-            }
+            n++;            
             if (servicePhoto == null) 
             {
                 Next.IsEnabled = false;               
@@ -192,6 +191,7 @@ namespace School
             else if(servicePhoto.Count == n) // если n достигла количества фотографий в листе, то дальше листать запрещено
             {
                 Next.IsEnabled = false;
+                Back.IsEnabled = true;
             }
             else // если объект не пустой, начинает переводить байтовый массив в изображение
             {
@@ -205,18 +205,15 @@ namespace School
         {
             List<ServicePhoto> photo = DBase.DB.ServicePhoto.Where(x => x.ServiceID == service.ID).ToList();
 
-            n--;
-            if (Next.IsEnabled == false)
-            {
-                Next.IsEnabled = true;
-            }
+            n--;          
             if (photo == null)  
             {
                 Back.IsEnabled = false;
             }
-            else if(n<0)
+            else if(n<0) // если n достигла первой фотографий в листе, то дальше листать запрещено
             {
                 Back.IsEnabled = false;
+                Next.IsEnabled = true;
             }
             else  // если объект не пустой, начинает переводить байтовый массив в изображение
             {                
@@ -227,8 +224,8 @@ namespace School
 
         private void SavePhoto_Click(object sender, RoutedEventArgs e)
         {
-            List<ServicePhoto> u = DBase.DB.ServicePhoto.Where(x => x.ServiceID == service.ID).ToList();
-            service.MainImagePath = u[n].PhotoPath;
+            List<ServicePhoto> photo = DBase.DB.ServicePhoto.Where(x => x.ServiceID == service.ID).ToList();
+            service.MainImagePath = photo[n].PhotoPath;
             DBase.DB.SaveChanges();
             MessageBox.Show("Фотография изменена");
             SavePhoto.Visibility = Visibility.Collapsed;
@@ -358,6 +355,11 @@ namespace School
             {
                 MessageBox.Show("Не удалось добавить запись. Проверьте заполненнеы поля");
             }
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            ClassFrame.newFrame.Navigate(new HomePage("0000"));
         }
     }
 

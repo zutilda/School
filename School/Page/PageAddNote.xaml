@@ -5,23 +5,26 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:School"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-       MinHeight="450" MinWidth="800"
-      Title="PageAddNote">
+       d:MinHeight="500" d:MinWidth="800"
+      Title="Запись">
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Запись клиента на услугу" Style="{StaticResource HeaderText}"/>
+        </Grid>
+        <Grid Grid.Row="1">
             <StackPanel HorizontalAlignment="Center">
                 <TextBlock Name="Title" FontSize="18"></TextBlock>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <StackPanel>
                 <GroupBox Header="Выберите клиента на запись" Width="400">
                     <ComboBox Name="FullName">
@@ -42,13 +45,16 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="10 0 10 0">
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="10 0 10 0">
             <TextBlock Text="Комментарий" Style="{StaticResource FontFamilyText}"/>
             <TextBox Name="Comment" Height="70"/>
         </StackPanel>
-        <Grid Grid.Row="3">
-            <StackPanel>
+        <Grid Grid.Row="4">
+            <StackPanel HorizontalAlignment="Left">
                 <Button Name="Add" Template="{StaticResource Button}" Click="Add_Click">Записать</Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right">
+                <Button Name="Home" Template="{StaticResource Button}" Click="Home_Click">На главную</Button>
             </StackPanel>
         </Grid>
     </Grid>

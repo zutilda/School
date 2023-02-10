@@ -5,16 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:School"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-       MinHeight="450" MinWidth="800"
-      Title="PageNearNote">
+       d:MinHeight="500" d:MinWidth="800"
+      Title="Ближайшие записи">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="350"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ListView Name="ClassNote" Grid.Row="0"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" AlternationCount="2">
+        <Grid Grid.Row="0">
+            <TextBlock x:Name="Title"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Ближайшие записи" Style="{StaticResource HeaderText}"/>
+        </Grid>
+        <ListView Name="ClassNote" Grid.Row="1"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" HorizontalContentAlignment="Stretch" AlternationCount="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
@@ -44,6 +47,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Grid.Row="1" Name="Home" Template="{StaticResource Button}" Click="Home_Click">На главную</Button>
+        <Button Grid.Row="2" Name="Home" Template="{StaticResource Button}" Click="Home_Click">На главную</Button>
     </Grid>
 </Page>

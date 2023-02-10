@@ -33,6 +33,10 @@ namespace School
             FullName.DisplayMemberPath = "FullName";
         }
 
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            ClassFrame.newFrame.Navigate(new HomePage("0000"));
+        }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             if (CheckData())
