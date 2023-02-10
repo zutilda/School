@@ -102,7 +102,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0" Name="Home" Template="{StaticResource Button}" Click="Home_Click">На главную</Button>
-            <Button Grid.Column="1" Name="AddService" Visibility="Collapsed" Click="AddService_Click" Width="300">Добавить новую услугу</Button>
+            <Button Grid.Column="1" Name="AddService" Template="{StaticResource Button}" Visibility="Collapsed" Click="AddService_Click" Width="300">Добавить новую услугу</Button>
         </Grid>
         <StackPanel Grid.Row="5" VerticalAlignment="Center">
             <TextBlock Name="CountService"></TextBlock>

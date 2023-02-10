@@ -26,9 +26,9 @@
                 <StackPanel Grid.Column="0">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Button Name="Back" Click="Back_Click" Visibility="Collapsed" IsEnabled="False"></Button>
+                            <Button Name="Back" Click="Back_Click" Visibility="Collapsed" IsEnabled="False" Template="{StaticResource ButtonInElement}">Назад</Button>
                             <Image Name="ImageService"  Source="../image/picture.png" Width="180" Height="150" ></Image>
-                            <Button Name="Next"  Click="Next_Click" Visibility="Collapsed" ></Button>
+                            <Button Name="Next"  Click="Next_Click" Visibility="Collapsed" Template="{StaticResource ButtonInElement}">Вперед</Button>
                         </StackPanel>
                         <Button Name="SavePhoto" Template="{StaticResource ButtonInElement}" Click="SavePhoto_Click" Visibility="Collapsed">Сохранить изображение</Button>
                         <Button Name="AddPhoto" Template="{StaticResource ButtonInElement}" Click="AddPhoto_Click" Visibility="Visible">Добавить изображение</Button>

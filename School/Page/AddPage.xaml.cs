@@ -27,33 +27,42 @@ namespace School
         string path;
         bool flagUpdate;
         Service service;
-        ServicePhoto servicephoto;
         public AddPage()
         {
             InitializeComponent();
-            AddPhotos.Visibility = Visibility.Collapsed;
+
+            service = new Service();
+            AddPhotos.Visibility = Visibility.Collapsed;           
         }
         public AddPage(Service service)
         {
             InitializeComponent();
             flagUpdate = true;
 
+            this.service = service;
+
             IdService.Visibility = Visibility.Visible;
             IdService.Text = service.ID.ToString();
             NameServices.Text = service.Title;
             Description.Text = service.Description;
-            PriceServices.Text = service.cost.ToString();
+            PriceServices.Text = Math.Round(service.Cost, 0).ToString();
             TimeServices.Text = service.time.ToString();
 
-            // вывод картинки
-            if (service.MainImagePath != null)
+            if (service.Discount == null)
             {
-                BitmapImage img = new BitmapImage(new Uri(service.MainImagePath, UriKind.RelativeOrAbsolute));
-                ImageService.Source = img;
+                Sale.Text = "0";
+            }
+            else
+            {
+                Sale.Text = (service.Discount * 100).ToString();
             }
 
+            path = service.MainImagePath;
+            ImageService.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+
+           
             UpdatePhoto.Visibility = Visibility.Visible;
-            IdService.Visibility = Visibility.Visible;
+            IdService.Visibility = Visibility.Visible;          
 
         }
         public bool NameService(string title)
@@ -157,6 +166,8 @@ namespace School
                 AddPhotos.Visibility = Visibility.Collapsed;
                 SavePhoto.Visibility = Visibility.Visible;
                 DeletPhoto.Visibility = Visibility.Visible;
+                Back.Visibility = Visibility.Visible;
+                Next.Visibility = Visibility.Visible;
 
             }
             else
@@ -174,37 +185,43 @@ namespace School
             {
                 Back.IsEnabled = true;
             }
-            if (servicePhoto != null)  // если объект не пустой, начинает переводить байтовый массив в изображение
+            if (servicePhoto == null) 
             {
-
-                BitmapImage img = new BitmapImage(new Uri(servicePhoto[n].PhotoPath, UriKind.RelativeOrAbsolute));
-                ImageService.Source = img;
+                Next.IsEnabled = false;               
             }
-            if (n == servicePhoto.Count - 1)
+            else if(servicePhoto.Count == n) // если n достигла количества фотографий в листе, то дальше листать запрещено
             {
                 Next.IsEnabled = false;
+            }
+            else // если объект не пустой, начинает переводить байтовый массив в изображение
+            {
+                BitmapImage img = new BitmapImage(new Uri(servicePhoto[n].PhotoPath, UriKind.RelativeOrAbsolute));
+                ImageService.Source = img;
             }
         }
 
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            List<ServicePhoto> u = DBase.DB.ServicePhoto.Where(x => x.ServiceID == service.ID).ToList();
+            List<ServicePhoto> photo = DBase.DB.ServicePhoto.Where(x => x.ServiceID == service.ID).ToList();
 
             n--;
             if (Next.IsEnabled == false)
             {
                 Next.IsEnabled = true;
             }
-            if (u != null)  // если объект не пустой, начинает переводить байтовый массив в изображение
-            {
-
-                BitmapImage img = new BitmapImage(new Uri(u[n].PhotoPath, UriKind.RelativeOrAbsolute));
-                ImageService.Source = img;
-            }
-            if (n == 0)
+            if (photo == null)  
             {
                 Back.IsEnabled = false;
+            }
+            else if(n<0)
+            {
+                Back.IsEnabled = false;
+            }
+            else  // если объект не пустой, начинает переводить байтовый массив в изображение
+            {                
+                BitmapImage img = new BitmapImage(new Uri(photo[n].PhotoPath, UriKind.RelativeOrAbsolute));
+                ImageService.Source = img;
             }
         }
 
@@ -219,6 +236,8 @@ namespace School
             UpdatePhoto.Visibility = Visibility.Visible;
             AddPhotos.Visibility = Visibility.Visible;
             DeletPhoto.Visibility = Visibility.Collapsed;
+            Back.Visibility = Visibility.Collapsed;
+            Next.Visibility = Visibility.Collapsed;
             ClassFrame.newFrame.Navigate(new PageListOfService());
         }
 
@@ -283,11 +302,12 @@ namespace School
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (NameServices.Text == "" || PriceServices.Text == "" || TimeServices.Text == "" || Sale.Text == "" || path == null)
+            if(NameServices.Text == "" || PriceServices.Text == "" || TimeServices.Text == "")
             {
-                MessageBox.Show("Обязательные поля не заполнены", "Ошибка", MessageBoxButton.OK);
+                MessageBox.Show("Обязательные поля не могут быть пустыми");
+                return;
             }
-            else
+            try
             {
                 if (NameService(NameServices.Text))
                 {
@@ -334,8 +354,13 @@ namespace School
 
                 }
             }
+            catch
+            {
+                MessageBox.Show("Не удалось добавить запись. Проверьте заполненнеы поля");
+            }
         }
-
     }
+
 }
+
 
